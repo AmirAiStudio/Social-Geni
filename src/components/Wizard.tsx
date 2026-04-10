@@ -632,7 +632,7 @@ export function Wizard({ onComplete, interfaceLang }: WizardProps) {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl shadow-xl border-muted/50 overflow-hidden">
+      <Card className="w-full max-w-2xl shadow-[0_8px_20px_-6px_var(--tw-shadow-color)] shadow-primary/25 border-muted/50 overflow-hidden">
         <div className="flex h-2 bg-muted">
           <motion.div 
             className="bg-primary h-full" 

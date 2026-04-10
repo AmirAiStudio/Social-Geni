@@ -96,7 +96,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
 
         <TabsContent value="strategy" className="space-y-6">
           <div className="grid md:grid-cols-3 gap-6">
-            <Card className="md:col-span-2">
+            <Card className="md:col-span-2 shadow-[0_6px_15px_-4px_var(--tw-shadow-color)] shadow-primary/15">
               <CardHeader>
                 <CardTitle>{t.platformStrategy}</CardTitle>
                 <CardDescription>{t.platformStrategyDesc}</CardDescription>
@@ -118,7 +118,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="shadow-[0_6px_15px_-4px_var(--tw-shadow-color)] shadow-primary/15">
               <CardHeader>
                 <CardTitle>{t.contentMix}</CardTitle>
                 <CardDescription>{t.contentMixDesc} {t.durations[state.duration as keyof typeof t.durations] || state.duration}</CardDescription>
@@ -152,7 +152,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
 
         {/* Captions Generator */}
         <TabsContent value="captions">
-          <Card>
+          <Card className="shadow-[0_6px_15px_-4px_var(--tw-shadow-color)] shadow-primary/15">
             <CardHeader>
               <CardTitle>{t.captionGenerator}</CardTitle>
               <CardDescription>{t.captionGeneratorDesc}</CardDescription>
@@ -209,7 +209,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
 
         {/* Image Prompts Generator */}
         <TabsContent value="images">
-          <Card>
+          <Card className="shadow-[0_6px_15px_-4px_var(--tw-shadow-color)] shadow-primary/15">
             <CardHeader>
               <CardTitle>{t.imagePromptGenerator}</CardTitle>
               <CardDescription>{t.imagePromptGeneratorDesc}</CardDescription>
@@ -320,7 +320,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
 
         {/* Video Scripts Generator */}
         <TabsContent value="videos">
-          <Card>
+          <Card className="shadow-[0_6px_15px_-4px_var(--tw-shadow-color)] shadow-primary/15">
             <CardHeader>
               <CardTitle>{t.videoScriptGenerator}</CardTitle>
               <CardDescription>{t.videoScriptGeneratorDesc}</CardDescription>
@@ -387,7 +387,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
 
         {/* Ads Generator */}
         <TabsContent value="ads">
-          <Card>
+          <Card className="shadow-[0_6px_15px_-4px_var(--tw-shadow-color)] shadow-primary/15">
             <CardHeader>
               <CardTitle>{t.adCopyGenerator}</CardTitle>
               <CardDescription>{t.adCopyGeneratorDesc}</CardDescription>
@@ -424,7 +424,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
 
         {/* Ideas Generator */}
         <TabsContent value="ideas">
-          <Card>
+          <Card className="shadow-[0_6px_15px_-4px_var(--tw-shadow-color)] shadow-primary/15">
             <CardHeader>
               <CardTitle>{t.contentIdeasGenerator}</CardTitle>
               <CardDescription>{t.contentIdeasGeneratorDesc}</CardDescription>
