@@ -1,7 +1,18 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { AppState } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+let aiInstance: GoogleGenAI | null = null;
+
+function getAI() {
+  if (!aiInstance) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey || apiKey === 'undefined') {
+      throw new Error("GEMINI_API_KEY is missing. Please set it in your environment variables.");
+    }
+    aiInstance = new GoogleGenAI({ apiKey });
+  }
+  return aiInstance;
+}
 
 function getBehaviorRules(state: AppState): string {
   let rules = `\n    CRITICAL BEHAVIOR RULES FOR THIS CATEGORY:\n`;
@@ -104,6 +115,7 @@ export async function generateStrategy(state: AppState) {
     4. A summary of the overall strategy (written in ${state.interfaceLanguage || 'English'})
   `;
 
+  const ai = getAI();
   const response = await ai.models.generateContent({
     model: "gemini-3.1-pro-preview",
     contents: prompt,
@@ -188,6 +200,7 @@ Format the prompts specifically for the "Nano Banana" AI image generator. Make t
     Please provide the output JSON with titles and notes translated to ${state.interfaceLanguage || 'English'} where appropriate. The actual content should be in ${state.contentLanguage}.
   `;
 
+  const ai = getAI();
   const response = await ai.models.generateContent({
     model: "gemini-3.1-pro-preview",
     contents: prompt,
