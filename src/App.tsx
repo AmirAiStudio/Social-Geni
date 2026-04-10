@@ -71,7 +71,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary/20 transition-colors duration-300">
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10" dir="ltr">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -82,10 +82,10 @@ export default function App() {
           </div>
           <div className="flex items-center gap-2 bg-muted/30 p-1 rounded-full border">
             {[
-              { id: 'default', color: 'bg-foreground', label: t.colorMoods['Default'] },
-              { id: 'soft', color: 'bg-[oklch(0.75_0.1_250)]', label: t.colorMoods['Soft'] },
-              { id: 'aggressive', color: 'bg-[oklch(0.6_0.25_25)]', label: t.colorMoods['Aggressive'] },
-              { id: 'girly', color: 'bg-[oklch(0.7_0.2_340)]', label: t.colorMoods['Girly'] },
+              { id: 'default', color: 'bg-black', label: t.colorMoods['Default'] },
+              { id: 'soft', color: 'bg-[#1E90FF]', label: t.colorMoods['Soft'] },
+              { id: 'aggressive', color: 'bg-[#FF2800]', label: t.colorMoods['Aggressive'] },
+              { id: 'girly', color: 'bg-[#FF6EC7]', label: t.colorMoods['Girly'] },
             ].map((mood) => (
               <button
                 key={mood.id}
@@ -149,6 +149,20 @@ export default function App() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <footer className="mt-4 text-center space-y-1">
+          <a 
+            href="https://wa.me/201144240400" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-primary/60 hover:text-primary hover:underline transition-all"
+          >
+            Powered by A³ Solutions
+          </a>
+          <p className="text-[10px] text-primary/40 tracking-wider uppercase font-bold">
+            Smart Solutions - Real Impact
+          </p>
+        </footer>
       </main>
     </div>
   );

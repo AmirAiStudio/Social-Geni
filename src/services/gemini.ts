@@ -91,7 +91,11 @@ export async function generateStrategy(state: AppState) {
 
     Important: The user's interface language is ${state.interfaceLanguage || 'English'}. 
     ALL values in the output JSON (summary, platform names, content types, category names, posting frequency) MUST be written in ${state.interfaceLanguage || 'English'}.
-    If the language is Arabic, ensure the strategy feels natural and culturally relevant for an Arabic-speaking audience.
+    
+    If the interface language is Arabic:
+    - The "summary" MUST be written in Arabic.
+    - The "summary" MUST reflect the selected dialect (${state.arabicDialect}) in its phrasing and tone.
+    - Ensure the strategy feels natural and culturally relevant for an Arabic-speaking audience.
 
     Provide a clear and simple content strategy including:
     1. Best content types per platform (translated to ${state.interfaceLanguage || 'English'})
@@ -143,11 +147,17 @@ export async function generateContent(state: AppState, contentType: string, opti
   if (contentType === 'Captions') {
     specificOptions = `- Style: ${options.style}\n- Length: ${options.length}`;
   } else if (contentType === 'Image Prompts') {
+    const productLogic = options.includeProduct 
+      ? `- Focus: The specific product described as: "${options.productDescription || 'the brand\'s main product'}"
+- IMPORTANT: Explicitly mention in the prompt that a product image is attached as an input and describe how the product should be featured prominently and realistically in the scene.`
+      : `- Focus: The brand's overall business identity, atmosphere, and services (NOT specific products).
+- Goal: Create lifestyle or atmospheric imagery that represents the brand's essence.`;
+
     specificOptions = `- Style: ${options.style}
 - Aspect Ratio: ${options.ratio}
 ${options.isCarousel ? '- Format: Carousel (Generate a series of related prompts that tell a story or show a sequence)' : ''}
 ${options.includeLogo ? '- IMPORTANT: Explicitly mention in the prompt that a logo image is attached as an input and describe how the logo should be seamlessly integrated into the scene.' : ''}
-${options.includeProduct ? '- IMPORTANT: Explicitly mention in the prompt that a product image is attached as an input and describe how the product should be featured prominently and realistically in the scene.' : ''}
+${productLogic}
 
 CRITICAL INSTRUCTIONS FOR IMAGE PROMPTS:
 Format the prompts specifically for the "Nano Banana" AI image generator. Make them highly professional, structured, detailed, and separated by commas or sections (e.g., Subject, Lighting, Environment, Camera, Mood). The prompts themselves MUST be in English as AI image generators understand English best, even if the content language is Arabic. Provide the title and notes in the requested interface language.`;

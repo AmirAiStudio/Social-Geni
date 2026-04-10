@@ -35,6 +35,7 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
   const [imageRatio, setImageRatio] = useState('1:1');
   const [isCarousel, setIsCarousel] = useState(false);
   const [videoRatio, setVideoRatio] = useState('9:16');
+  const [productDescription, setProductDescription] = useState('');
 
   const t = translations[interfaceLang === 'Arabic' ? 'ar' : 'en'];
 
@@ -44,7 +45,14 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
     try {
       let options = {};
       if (type === 'Captions') options = { style: captionStyle, length: captionLength };
-      if (type === 'Image Prompts') options = { style: imageStyle, includeLogo, includeProduct, ratio: imageRatio, isCarousel };
+      if (type === 'Image Prompts') options = { 
+        style: imageStyle, 
+        includeLogo, 
+        includeProduct, 
+        ratio: imageRatio, 
+        isCarousel,
+        productDescription: includeProduct ? productDescription : ''
+      };
       if (type === 'Video Scripts') options = { duration: videoDuration, style: videoStyle, ratio: videoRatio };
       
       const result = await generateContent({ ...state, interfaceLanguage: interfaceLang }, type, options);
@@ -273,6 +281,18 @@ export function Dashboard({ state, strategy, onReset, interfaceLang }: Dashboard
                         <p className="text-xs text-muted-foreground">{t.includeProductDesc}</p>
                       </div>
                     </div>
+
+                    {includeProduct && (
+                      <div className="space-y-2 pt-2 animate-in fade-in slide-in-from-top-1">
+                        <Label className="text-xs font-bold text-primary">{t.tellUsAboutProduct}</Label>
+                        <textarea
+                          value={productDescription}
+                          onChange={(e) => setProductDescription(e.target.value)}
+                          placeholder={t.productDescPlaceholder}
+                          className="w-full min-h-[80px] p-2 text-xs rounded-md border bg-background focus:ring-1 focus:ring-primary outline-none resize-none"
+                        />
+                      </div>
+                    )}
                   </div>
                   <Button 
                     className="w-full" 
